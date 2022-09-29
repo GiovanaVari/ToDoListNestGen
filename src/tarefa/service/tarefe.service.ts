@@ -5,12 +5,13 @@ import { Tarefa } from "../entities/tarefa.entity";
 
 @Injectable()
 export class TarefaService {
+
     constructor(
         @InjectRepository(Tarefa)
         private tarefaRepository: Repository<Tarefa>
     ) { }
 
-    asyncfindAll(): Promise<Tarefa[]> {
+    async findAll(): Promise<Tarefa[]> {
         return this.tarefaRepository.find({
             // relacionando tarefas com categoria
             relations: {
@@ -24,16 +25,17 @@ export class TarefaService {
             where: {
                 id
             },
-            // relacionando tarefas com categoria
             relations: {
                 categoria: true
             }
         })
 
-        if (!tarefa)
-            throw new HttpException('Tarefa não foi encontrada', HttpStatus.NOT_FOUND)
 
+        if (!tarefa) {
+            throw new HttpException('Tarefa não foi encontrada!', HttpStatus.NOT_FOUND)
+        }
         return tarefa
+
     }
 
     async findByNome(nome: string): Promise<Tarefa[]> {
@@ -41,28 +43,30 @@ export class TarefaService {
             where: {
                 nome: ILike(`%${nome}%`)
             },
-            // relacionando tarefas com categoria
             relations: {
                 categoria: true
             }
         })
     }
+
     async create(tarefa: Tarefa): Promise<Tarefa> {
         return this.tarefaRepository.save(tarefa)
     }
     async update(tarefa: Tarefa): Promise<Tarefa> {
         let tarefaUpdate = await this.findById(tarefa.id)
 
-        if (!tarefaUpdate || !tarefa.id)
+        if (!tarefaUpdate || !tarefa.id) {
             throw new HttpException('Tarefa não encontrada!', HttpStatus.NOT_FOUND)
+        }
         return this.tarefaRepository.save(tarefa)
     }
 
     async delete(id: number): Promise<DeleteResult> {
         let tarefaDelete = await this.findById(id)
 
-        if (!tarefaDelete)
+        if (!tarefaDelete) {
             throw new HttpException('Tarefa não foi encontrada!', HttpStatus.NOT_FOUND)
+        }
         return this.tarefaRepository.delete(id)
     }
 

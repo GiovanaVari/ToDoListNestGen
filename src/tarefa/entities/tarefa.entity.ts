@@ -3,28 +3,28 @@ import { IsNotEmpty, MaxLength } from "class-validator";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
 
-@Entity({name: 'tb_tarefa'})
-export class Tarefa{
-    
+@Entity({ name: 'tb_tarefa' })
+export class Tarefa {
+
     @PrimaryGeneratedColumn()
     @ApiProperty()
     id: number
 
     @IsNotEmpty()
     @MaxLength(50)
-    @Column({nullable: false, length: 50})
+    @Column({ nullable: false, length: 50 })
     @ApiProperty()
     nome: string
 
     @IsNotEmpty()
     @MaxLength(500)
-    @Column({nullable: false, length: 500})
+    @Column({ nullable: false, length: 500 })
     @ApiProperty()
     descricao: string
 
     @IsNotEmpty()
     @MaxLength(50)
-    @Column({nullable: false, length: 50})
+    @Column({ nullable: false, length: 500 })
     @ApiProperty()
     responsavel: string
 
@@ -39,7 +39,7 @@ export class Tarefa{
     @ManyToOne(() => Categoria, (categoria) => categoria.tarefas, {
         onDelete: "CASCADE"
     })
-    @ApiProperty({type: () => Categoria})
+    @ApiProperty({ type: () => Categoria })
     categoria: Categoria
 
 }
