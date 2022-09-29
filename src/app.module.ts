@@ -1,4 +1,3 @@
-import { Type } from '@nestjs/common';
 import { CategoriaModule } from './categoria/modules/categoria.module';
 import { Categoria } from './categoria/entities/categoria.entity';
 import { Module } from '@nestjs/common';
@@ -25,7 +24,7 @@ import { AppController } from './app.controller';
       url: process.env.DATABASE_URL,
       logging: false,
       dropSchema: false,
-      ssl:{
+      ssl: {
         rejectUnauthorized: false
       },
       synchronize: true,
@@ -37,4 +36,4 @@ import { AppController } from './app.controller';
   controllers: [AppController],
   providers: [],
 })
-export class AppModule {}
+export class AppModule { }
