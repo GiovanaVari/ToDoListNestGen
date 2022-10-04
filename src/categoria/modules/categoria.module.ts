@@ -1,4 +1,4 @@
-import { CategoriaController } from './../controllers/categori.controller';
+import { CategoriaController } from '../controllers/categoria.controller';
 import { CategoriaService } from './../services/categoria.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from "@nestjs/common";

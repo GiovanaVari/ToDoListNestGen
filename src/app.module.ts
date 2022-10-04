@@ -8,28 +8,28 @@ import { AppController } from './app.controller';
 
 @Module({
   imports: [
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: 'localhost',
-    //   port: 3306,
-    //   username: 'root',
-    //   password: 'root',
-    //   database: 'db_todo',
-    //   entities: [Tarefa, Categoria],
-    //   synchronize: true
-    // }),
-
     TypeOrmModule.forRoot({
-      type: 'postgres',
-      url: process.env.DATABASE_URL,
-      logging: false,
-      dropSchema: false,
-      ssl: {
-        rejectUnauthorized: false
-      },
-      synchronize: true,
-      autoLoadEntities: true
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: 'root',
+      database: 'db_todo',
+      entities: [Tarefa, Categoria],
+      synchronize: true
     }),
+
+    // TypeOrmModule.forRoot({
+    //   type: 'postgres',
+    //   url: process.env.DATABASE_URL,
+    //   logging: false,
+    //   dropSchema: false,
+    //   ssl: {
+    //     rejectUnauthorized: false
+    //   },
+    //   synchronize: true,
+    //   autoLoadEntities: true
+    // }),
     TarefaModule,
     CategoriaModule
   ],
